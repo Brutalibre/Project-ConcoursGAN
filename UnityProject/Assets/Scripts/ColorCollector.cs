@@ -17,11 +17,45 @@ public class ColorCollector : MonoBehaviour
     public Material blue;
     public Material indigo;
     public Material violet;
-    public float colorBurstPower = 100f;
-    public float colorBurstRange = 3f;
+    public float colorBurstForce = 100f;
+    public float colorBurstRadius = 3f;
+    public float colorBurstDistanceToCenter = .15f;
+    public GameObject colorCube;
     
     private List<ColorCollector.Color> collectedColors = new List<ColorCollector.Color>();
-    
+    private List<Vector3> burstPositions = new List<Vector3>();
+    private List<Rigidbody> waitingForBurst = new List<Rigidbody>();
+
+    void Start()
+    {
+        // The player starts with the gray color only
+        Collect(Color.Gray);
+
+        // When the cube bursts, all colors are placed around the center of the player
+        // The following list enumerate all positions for the colorCubes
+        // It allows us to randomly assign positions to color (the explosion's color dispersion will vary)
+        burstPositions.Add(new Vector3(0f,-colorBurstDistanceToCenter,0f));
+        burstPositions.Add(new Vector3(colorBurstDistanceToCenter,0f,0f));
+        burstPositions.Add(new Vector3(0f,colorBurstDistanceToCenter,0f));
+        burstPositions.Add(new Vector3(-colorBurstDistanceToCenter,0f,0f));
+        burstPositions.Add(new Vector3(colorBurstDistanceToCenter,-colorBurstDistanceToCenter,0f));
+        burstPositions.Add(new Vector3(colorBurstDistanceToCenter,colorBurstDistanceToCenter,0f));
+        burstPositions.Add(new Vector3(-colorBurstDistanceToCenter,colorBurstDistanceToCenter,0f));
+        burstPositions.Add(new Vector3(-colorBurstDistanceToCenter,-colorBurstDistanceToCenter,0f));
+    }
+
+    void FixedUpdate()
+    {
+        // Create burst animation if BurstColors() was called 
+        if (waitingForBurst.Count > 0)
+        {
+            for(int i = 0; i < waitingForBurst.Count; i++)
+                waitingForBurst[i].AddExplosionForce(colorBurstForce,transform.position,colorBurstRadius);
+               
+            waitingForBurst.Clear();
+        }
+    }
+
     public void Collect(Color color)
     {
         if (!collectedColors.Contains(color))
@@ -30,6 +64,51 @@ public class ColorCollector : MonoBehaviour
     
     public void BurstColors()
     {
-        Debug.Log("Burst");   
+        // Create a colored cube for each collected color 
+        // This animation is triggered when the player dies
+
+        int collectedColorsCount = collectedColors.Count;
+        for (int i = 0; i < collectedColorsCount; i++)
+        {
+            // Get random position for the current color
+            int randomIndex = Random.Range(0,collectedColors.Count);
+            Vector3 position = burstPositions[randomIndex];
+            burstPositions.RemoveAt(randomIndex);
+            
+            // Instantiate cube and give it the current color
+            GameObject instance = Instantiate(colorCube,position,Quaternion.identity) as GameObject;
+            instance.GetComponent<MeshRenderer>().material = materialFromColor(collectedColors[0]);
+            waitingForBurst.Add(instance.GetComponent<Rigidbody>());
+
+            // Remove current color from collection
+            collectedColors.RemoveAt(0);
+        }
+    }
+
+    Material materialFromColor(Color color)
+    {
+        switch (color)
+        {
+            case Color.Gray:
+                return gray;
+            case Color.Blue:
+                return blue;
+            case Color.Green:
+                return green;
+            case Color.Indigo:
+                return indigo;
+            case Color.Orange:
+                return orange;
+            case Color.Red:
+                return red;
+            case Color.Violet:
+                return violet;
+            case Color.Yellow:
+                return yellow;
+            default:
+                break;
+        }
+
+        return gray;
     }
 }

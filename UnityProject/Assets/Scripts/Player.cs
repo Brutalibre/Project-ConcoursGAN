@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public ColorCollector colorCollector;
     public LayerMask decorLayer;
     public float allowedDistanceToDecor = .05f;
+    public DecorCheck leftDecorCheck;
+    public DecorCheck rightDecorCheck;
 
     private Rigidbody rb;
     private bool isBouncing = false;
@@ -67,9 +69,9 @@ public class Player : MonoBehaviour
         if (horizontalMove == 0)
             return;
 
-        // Cancel move if playing is against decor
-        Vector3 direction = horizontalMove > 0 ? Vector3.right : Vector3.left;
-        if (isAgainstDecor(direction))
+        // Cancel move if player is against decor
+        bool facingRight = horizontalMove > 0 ? true : false;
+        if (isAgainstDecor(facingRight))
             return;
         
         // Move player 
@@ -85,33 +87,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    bool isAgainstDecor(Vector3 direction)
+    bool isAgainstDecor(bool facingRight)
     {
-        // Check if player is against wall or something static
-        // To do so, perform trois raycast going from the top, middle and bottom of the player
-        Vector3 raycastOrigin_middle = transform.position;
-
-        float halfPlayerHeight = transform.lossyScale.y / 2f;
-        
-        Vector3 raycastOrigin_top = raycastOrigin_middle;
-        raycastOrigin_top.y += halfPlayerHeight;
-        
-        Vector3 raycastOrigin_bottom = raycastOrigin_middle;
-        raycastOrigin_bottom.y -= halfPlayerHeight;
-
-        RaycastHit hit;
-        if (Physics.Raycast(raycastOrigin_middle, direction, out hit, 5, decorLayer)
-            || Physics.Raycast(raycastOrigin_top, direction, out hit, 5, decorLayer)
-            || Physics.Raycast(raycastOrigin_bottom, direction, out hit, 5, decorLayer))
-        {
-            float distanceToOutside = transform.lossyScale.x / 2f;
-            
-            // Cancel move if player is against decor
-            if(hit.distance <= distanceToOutside + allowedDistanceToDecor)
-                return true;
-        }
-
-        return false;
+        return facingRight ? rightDecorCheck.againstDecor : leftDecorCheck.againstDecor;
     }
 
     public void Bounce()
