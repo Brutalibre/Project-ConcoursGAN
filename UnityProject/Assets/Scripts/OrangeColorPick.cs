@@ -4,6 +4,7 @@ using System.Collections;
 public class OrangeColorPick : MonoBehaviour 
 {
     public float spinSpeed = 3f;
+    public ColorCollector colorCollector;
 
     void OnTriggerEnter(Collider other)
     {
@@ -11,6 +12,9 @@ public class OrangeColorPick : MonoBehaviour
         {
             // Give the player the ability to jump
             other.gameObject.GetComponent<Player>().EnableJump(true);
+
+            // Add color to the collection
+            colorCollector.Collect(ColorCollector.Color.Orange);
 
             // Hide this object
             gameObject.SetActive(false);

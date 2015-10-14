@@ -14,16 +14,22 @@ public class Bounce : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == Tags.Player)
+        if(other.tag == Tags.Activatable)
         {
-            // Player transform
-            Transform player = other.transform;
+            GameObject player = other.transform.parent.gameObject;
+            Transform playerTransform = other.transform.parent;
+
+            // Position player on bounce box
+            playerTransform.rotation = Quaternion.identity;
+            Vector3 newPlayerPosition = playerTransform.position;
+            newPlayerPosition.x = transform.position.x;
+            playerTransform.position = newPlayerPosition;      
 
             // Direction to aim for
-            Vector3 direction = target.position - player.position;
+            Vector3 direction = target.position - playerTransform.position;
 
             // Add force towards target
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            Rigidbody rb = player.GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
             rb.AddForce(direction * thrust);
 
@@ -31,7 +37,7 @@ public class Bounce : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
             // Prevent player from moving during bounce time
-            other.GetComponent<Player>().Bounce();
+            player.GetComponent<Player>().Bounce();
         }
     }
 }
