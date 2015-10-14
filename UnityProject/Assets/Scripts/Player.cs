@@ -54,7 +54,8 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        colorCollector.BurstColors();
+        colorCollector.BurstColors(transform.position);
+        gameObject.SetActive(false);
     }
     
     void Move()
