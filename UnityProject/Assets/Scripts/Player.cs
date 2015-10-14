@@ -51,12 +51,6 @@ public class Player : MonoBehaviour
             Die();
         }
     }
-
-    void Die()
-    {
-        colorCollector.BurstColors(transform.position);
-        gameObject.SetActive(false);
-    }
     
     void Move()
     {
@@ -86,6 +80,12 @@ public class Player : MonoBehaviour
             
             rb.velocity = newVelocity;
         }
+    }
+    
+    void Die()
+    {
+        colorCollector.BurstColors(transform.position);
+        gameObject.SetActive(false);
     }
 
     bool isAgainstDecor(bool facingRight)
