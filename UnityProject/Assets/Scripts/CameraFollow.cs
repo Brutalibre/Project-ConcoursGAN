@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour 
 {
-	public float followSpeed = 4f;
+    // From 0 to 1. The closer to 0, the more time it will take the camera to reach the player
+	public float followSpeed = 1f;
 
 	private Transform player;
 	private float margin = 0.02f;

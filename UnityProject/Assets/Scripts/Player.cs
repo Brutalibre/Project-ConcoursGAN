@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float allowedDistanceToDecor = .05f;
     public DecorCheck leftDecorCheck;
     public DecorCheck rightDecorCheck;
+    public DecorCheck groundCheck;
 
     private Rigidbody rb;
     private bool isBouncing = false;
@@ -66,12 +67,12 @@ public class Player : MonoBehaviour
 
         // Cancel move if player is against decor
         bool facingRight = horizontalMove > 0 ? true : false;
-        if (isAgainstDecor(facingRight))
+        if (IsAgainstDecor(facingRight))
             return;
         
         // Move player 
         rb.AddForce(new Vector3(horizontalMove, 0f, 0f));
-        
+
         // Make sure player is not moving too fast
         if (Mathf.Abs(rb.velocity.x) > moveSpeed)
         {
@@ -88,7 +89,8 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    bool isAgainstDecor(bool facingRight)
+
+    bool IsAgainstDecor(bool facingRight)
     {
         return facingRight ? rightDecorCheck.againstDecor : leftDecorCheck.againstDecor;
     }
@@ -121,7 +123,7 @@ public class Player : MonoBehaviour
             if (IsDoneBouncing())
             {
                 isBouncing = false;
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
                 canMove = true;
             }
             else
@@ -152,7 +154,7 @@ public class Player : MonoBehaviour
 
             // Prevent the player from double jumping by pressing Jump twice and quickly, because
             // the velocity remains at 0 a little while before the AddForce actually occurs.
-            if (rb.velocity.y == 0 && jumpDuration >= minJumpDuration)
+            if (jumpDuration >= minJumpDuration && groundCheck.againstDecor)
                 isJumping = false;
         }
         // Jump!
