@@ -31,10 +31,10 @@ public class ColorCollector : MonoBehaviour
     {
         // The player starts with the gray color only
         Collect(Color.Gray);
-        Collect(Color.Blue);
+        /* Collect(Color.Blue);
         Collect(Color.Red);
         Collect(Color.Yellow);
-        Collect(Color.Green);
+        Collect(Color.Green); */
 
         // When the cube bursts, all colors are placed around the center of the player
         // The following list enumerate all positions for the colorCubes

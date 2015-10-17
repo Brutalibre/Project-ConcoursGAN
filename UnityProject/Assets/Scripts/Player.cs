@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private float minBounceDuration = 0.1f;
     private bool isMinBoucing = false;
     private bool canMove = true;
-    private bool canJump = true;
+    private bool canJump = false;
     private bool isJumping = false;
     private float minJumpDuration = 0.1f;
     private float jumpDuration = 0f;
