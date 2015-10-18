@@ -85,7 +85,13 @@ public class Player : MonoBehaviour
     
     void Die()
     {
+        // The scene will be reloaded by the game controller
+        GameController.instance.PlayerDied();
+
+        // Death animation
         colorCollector.BurstColors(transform.position);
+
+        // Remove player from the scene
         gameObject.SetActive(false);
     }
 

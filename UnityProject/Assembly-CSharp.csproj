@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\ColorCollector.cs" />
      <Compile Include="Assets\Scripts\DecorCheck.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MovingPlatform.cs" />
      <Compile Include="Assets\Scripts\OrangeColorPick.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />

@@ -10,7 +10,6 @@ public class BluePath : MonoBehaviour
     private Player playerScript = null;
     private Transform player = null;
     private bool isMovingPlayer = false;
-    private float margin = .005f;
     private Rigidbody rb;
     private int bluePathIndex = 0;
 
