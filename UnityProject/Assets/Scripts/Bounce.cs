@@ -33,9 +33,6 @@ public class Bounce : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(direction * thrust);
 
-            // Enable rotation for better visual impact
-            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
-
             // Prevent player from moving during bounce time
             player.GetComponent<Player>().Bounce();
         }
