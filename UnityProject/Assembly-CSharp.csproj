@@ -49,13 +49,15 @@
      <Compile Include="Assets\Scripts\Bounce.cs" />
      <Compile Include="Assets\Scripts\BouncingBoxPlacementHelper.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\ColorPick.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\OrangeColorPick.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\RedColorPick.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\YellowColorPick.cs" />
      <Compile Include="Assets\Scripts\ColorCollector.cs" />
      <Compile Include="Assets\Scripts\DecorCheck.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MovingPlatform.cs" />
-     <Compile Include="Assets\Scripts\OrangeColorPick.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\RedColorPick.cs" />
      <Compile Include="Assets\Scripts\Tags.cs" />
      <None Include="Assets\TSF\Shaders\TSFOutline.shader" />
      <None Include="Assets\TSF\Shaders\TSF.shader" />
