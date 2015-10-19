@@ -16,12 +16,12 @@ public class GameController : MonoBehaviour
     }
 
     public void PlayerDied()
-    {Debug.Log("corotin");
+    {
         StartCoroutine(ReloadLevel());
     }
 
     public IEnumerator ReloadLevel()
-    {Debug.Log("dashit");
+    {
         yield return new WaitForSeconds(reloadGameTime);
         
         Application.LoadLevel(Application.loadedLevel);

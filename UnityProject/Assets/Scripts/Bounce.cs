@@ -34,7 +34,9 @@ public class Bounce : MonoBehaviour
             rb.AddForce(direction * thrust);
 
             // Prevent player from moving during bounce time
-            player.GetComponent<Player>().Bounce();
+            Player playerScript = player.GetComponent<Player>();
+            if(playerScript != null)
+                playerScript.Bounce();
         }
     }
 }
