@@ -49,9 +49,13 @@
      <Compile Include="Assets\Scripts\Bounce.cs" />
      <Compile Include="Assets\Scripts\BouncingBoxPlacementHelper.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\BlueColorPick.cs" />
      <Compile Include="Assets\Scripts\Color Fragments\ColorPick.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\GreenColorPick.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\IndigoColorPick.cs" />
      <Compile Include="Assets\Scripts\Color Fragments\OrangeColorPick.cs" />
      <Compile Include="Assets\Scripts\Color Fragments\RedColorPick.cs" />
+     <Compile Include="Assets\Scripts\Color Fragments\VioletColorPick.cs" />
      <Compile Include="Assets\Scripts\Color Fragments\YellowColorPick.cs" />
      <Compile Include="Assets\Scripts\ColorCollector.cs" />
      <Compile Include="Assets\Scripts\DecorCheck.cs" />
@@ -61,17 +65,11 @@
      <Compile Include="Assets\Scripts\Tags.cs" />
      <None Include="Assets\TSF\Shaders\TSFOutline.shader" />
      <None Include="Assets\TSF\Shaders\TSF.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
