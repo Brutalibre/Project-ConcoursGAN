@@ -55,6 +55,6 @@ public class MovingPlatform : MonoBehaviour
         }
         // Otherwise move towards the target
         else
-            rb.velocity = moveVector.normalized *  Time.deltaTime * moveSpeed;
+            rb.velocity = moveVector.normalized *  Time.deltaTime * moveSpeed * rb.mass;
     }
 }
