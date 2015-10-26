@@ -7,4 +7,6 @@ public class Tags : MonoBehaviour
     public const string Enemy = "Enemy";
     public const string Activatable = "Activatable";
     public const string GameController = "GameController";
+    public const string ColorCollector = "ColorCollector";
+    public const string MainCamera = "MainCamera";
 }

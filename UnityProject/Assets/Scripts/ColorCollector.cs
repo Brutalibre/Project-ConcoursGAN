@@ -24,8 +24,9 @@ public class ColorCollector : MonoBehaviour
     
     private List<ColorCollector.Color> collectedColors = new List<ColorCollector.Color>();
     private List<Vector3> burstPositions = new List<Vector3>();
-    private List<Rigidbody> waitingForBurst = new List<Rigidbody>();
     private Vector3 burstPosition;
+    private bool burstColors = false;
+    private List<GameObject> colorCubes = new List<GameObject>();
 
     void Start()
     {
@@ -48,12 +49,12 @@ public class ColorCollector : MonoBehaviour
     void FixedUpdate()
     {
         // Create burst animation if BurstColors() was called 
-        if (waitingForBurst.Count > 0)
+        if (burstColors)
         {
-            for(int i = 0; i < waitingForBurst.Count; i++)
-                waitingForBurst[i].AddExplosionForce(colorBurstForce,burstPosition,colorBurstRadius);
-               
-            waitingForBurst.Clear();
+            for(int i = 0; i < colorCubes.Count; i++)
+                colorCubes[i].GetComponent<Rigidbody>().AddExplosionForce(colorBurstForce,burstPosition,colorBurstRadius);
+
+            burstColors = false;
         }
     }
 
@@ -68,11 +69,12 @@ public class ColorCollector : MonoBehaviour
         // Create a colored cube for each collected color 
         // This animation is triggered when the player dies
 
-        int collectedColorsCount = collectedColors.Count;
+        List<ColorCollector.Color> colors = new List<ColorCollector.Color>(collectedColors);
+        int collectedColorsCount = colors.Count;
         for (int i = 0; i < collectedColorsCount; i++)
         {
             // Get random position for the current color
-            int randomIndex = Random.Range(0,collectedColors.Count);
+            int randomIndex = Random.Range(0,colors.Count);
             Vector3 position = burstPositions[randomIndex];
             position += targetPosition;
             burstPosition = targetPosition;
@@ -80,12 +82,25 @@ public class ColorCollector : MonoBehaviour
             
             // Instantiate cube and give it the current color
             GameObject instance = Instantiate(colorCube,position,Quaternion.identity) as GameObject;
-            instance.GetComponent<MeshRenderer>().material = materialFromColor(collectedColors[0]);
-            waitingForBurst.Add(instance.GetComponent<Rigidbody>());
+            instance.GetComponent<MeshRenderer>().material = materialFromColor(colors[0]);
+            colorCubes.Add(instance);
 
             // Remove current color from collection
-            collectedColors.RemoveAt(0);
+            colors.RemoveAt(0);
         }
+
+        burstColors = true;
+    }
+
+    public void CleanUp()
+    {
+        int count = colorCubes.Count;
+        for (int i = 0; i < count; i++)
+        {
+            Destroy(colorCubes[i]);
+        }
+
+        colorCubes.Clear();
     }
 
     Material materialFromColor(Color color)

@@ -91,8 +91,23 @@ public class Player : MonoBehaviour
         // Death animation
         colorCollector.BurstColors(transform.position);
 
+
+        rb.velocity = Vector3.zero;
+
         // Remove player from the scene
         gameObject.SetActive(false);
+    }
+
+    public void Respawn(Vector3 position)
+    {
+        transform.position = position;
+
+        // Reset decor check
+        groundCheck.againstDecor = false;
+        rightDecorCheck.againstDecor = false;
+        leftDecorCheck.againstDecor = false;
+        
+        gameObject.SetActive(true);
     }
 
 
