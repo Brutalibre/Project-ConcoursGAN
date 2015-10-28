@@ -5,22 +5,41 @@ using System.Collections.Generic;
 public class BluePath : MonoBehaviour 
 {
     public float speed = 1f;
-    public List<Transform> bluePath = new List<Transform>();
+    public bool goingForward = true;
+    public BluePath otherEnd;
+    [HideInInspector]
+    public bool waitForExit = false;
 
     private Player playerScript = null;
     private Transform player = null;
     private bool isMovingPlayer = false;
     private Rigidbody rb;
     private int bluePathIndex = 0;
+    private List<Transform> bluePath = new List<Transform>();
 
     void Start()
     {
         // Add start point to the blue path
         bluePath.Insert(0,transform);
+
+        // Add all other points
+        Transform keyFrames = transform.parent.FindChild("KeyFrames");
+
+        for (int i = 0; i < keyFrames.childCount; i++)
+        {
+            int index = goingForward ? i : keyFrames.childCount - 1 - i;
+            bluePath.Add(keyFrames.GetChild(index));
+        }
+
+        // Add end
+        bluePath.Add(otherEnd.transform);
     }
 
     void OnTriggerEnter(Collider other)
     {
+        if (waitForExit)
+            return;
+
         if(other.tag == Tags.Player)
         {
             player = other.transform;
@@ -29,6 +48,17 @@ public class BluePath : MonoBehaviour
             rb.isKinematic = true;
             playerScript.enabled = false;
             isMovingPlayer = true;
+
+            otherEnd.waitForExit = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (waitForExit)
+        {
+            if(other.tag == Tags.Player)
+                waitForExit = false;
         }
     }
 
@@ -71,6 +101,7 @@ public class BluePath : MonoBehaviour
                 bluePathIndex = 0;
                 playerScript.enabled = true;
                 rb.isKinematic = false;
+                playerScript.ResetDecorCheck();
             }
         }
     }

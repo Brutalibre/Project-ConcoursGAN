@@ -101,15 +101,17 @@ public class Player : MonoBehaviour
     public void Respawn(Vector3 position)
     {
         transform.position = position;
+        ResetDecorCheck();
+        gameObject.SetActive(true);
+    }
 
+    public void ResetDecorCheck()
+    {
         // Reset decor check
         groundCheck.againstDecor = false;
         rightDecorCheck.againstDecor = false;
         leftDecorCheck.againstDecor = false;
-        
-        gameObject.SetActive(true);
     }
-
 
     bool IsAgainstDecor(bool facingRight)
     {
