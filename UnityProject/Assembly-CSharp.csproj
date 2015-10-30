@@ -45,8 +45,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AudioScript.cs" />
      <Compile Include="Assets\PrimitivePlus\Scripts\PrimitivePlusEditor.cs" />
+     <Compile Include="Assets\Scripts\AudioScript.cs" />
      <Compile Include="Assets\Scripts\BluePath.cs" />
      <Compile Include="Assets\Scripts\Bounce.cs" />
      <Compile Include="Assets\Scripts\BouncingBoxPlacementHelper.cs" />
@@ -63,9 +63,11 @@
      <Compile Include="Assets\Scripts\ColorCollector.cs" />
      <Compile Include="Assets\Scripts\DecorCheck.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\InsidePortal.cs" />
      <Compile Include="Assets\Scripts\MovingPlatform.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Tags.cs" />
+     <Compile Include="Assets\Scripts\Teleport.cs" />
      <Compile Include="Assets\Scripts\TransformAnimation.cs" />
      <Compile Include="Assets\Scripts\ZPlatform.cs" />
      <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
