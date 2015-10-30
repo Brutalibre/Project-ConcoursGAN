@@ -1,9 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="../../PCG-AngryBirds/Assets/Scripts/PythagorasParser.cs">
     <Files>
-      <File FileName="../../PCG-AngryBirds/Assets/Scripts/PythagorasParser.cs" Line="77" Column="27" />
+      <File FileName="../../PCG-AngryBirds/Assets/Scripts/PythagorasParser.cs" Line="77" Column="9" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
