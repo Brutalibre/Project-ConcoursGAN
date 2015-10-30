@@ -4,8 +4,10 @@ using System.Collections;
 public class Bounce : MonoBehaviour 
 {
     public float thrust = 100f;
+    public AudioSource sound;
           
     private Transform target;
+
 
     void Awake()
     {
@@ -37,6 +39,9 @@ public class Bounce : MonoBehaviour
             Player playerScript = player.GetComponent<Player>();
             if(playerScript != null)
                 playerScript.Bounce();
+
+            // Play sound
+            sound.Play();
         }
     }
 }
