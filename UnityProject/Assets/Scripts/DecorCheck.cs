@@ -5,18 +5,21 @@ public class DecorCheck : MonoBehaviour
 {
     public bool againstDecor = false;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        againstDecor = true;
+        if(other.tag != Tags.Portal)
+            againstDecor = true;
     }
 
-    void OnTriggerStay()
+    void OnTriggerStay(Collider other)
     {
-        againstDecor = true;
+        if (other.tag != Tags.Portal)
+            againstDecor = true;
     }
 
-    void OnTriggerExit()
+    void OnTriggerExit(Collider other)
     {
-        againstDecor = false;
+        if (other.tag != Tags.Portal)
+            againstDecor = false;
     }
 }

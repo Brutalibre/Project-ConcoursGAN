@@ -23,9 +23,15 @@ public class InsidePortal : MonoBehaviour {
         if (!insidePortal)
         {
             if (departure == entrance)
-                player.transform.position = entrance.transform.position;
-            else
+            {
                 player.transform.position = exit.transform.position;
+                Debug.Log("entrance");
+            }
+            else
+            {
+                player.transform.position = entrance.transform.position;
+                Debug.Log("exit");
+            }
 
             insidePortal = true;
         }

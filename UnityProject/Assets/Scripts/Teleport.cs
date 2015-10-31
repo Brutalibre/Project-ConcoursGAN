@@ -22,9 +22,8 @@ public class Teleport : MonoBehaviour
     {
         if(other.tag == Tags.Player)
         {
-            Debug.Log("player enter");
             inDoor = true;
-            GetComponentInParent<InsidePortal>().GoToOtherDoor(GetComponent<GameObject>());
+            GetComponentInParent<InsidePortal>().GoToOtherDoor(gameObject);
         }
     }
 

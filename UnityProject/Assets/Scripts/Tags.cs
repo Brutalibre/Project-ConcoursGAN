@@ -9,4 +9,5 @@ public class Tags : MonoBehaviour
     public const string GameController = "GameController";
     public const string ColorCollector = "ColorCollector";
     public const string MainCamera = "MainCamera";
+    public const string Portal = "Portal";
 }
