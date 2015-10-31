@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GreenColorPick : ColorPick {
 
     public List<GameObject> greenPlatforms = new List<GameObject>();
     public Material color;
+    public Text txt;
 
     protected override void OnColorPick()
     {
@@ -28,6 +30,11 @@ public class GreenColorPick : ColorPick {
             // Paint all the shit green
             sup.gameObject.GetComponent<MeshRenderer>().material = color;
             rope.gameObject.GetComponent<MeshRenderer>().material = color;
+
+            // Activate help text
+            txt.GetComponent<TextScript>().enabled = true;
+            txt.GetComponent<TextScript>().launchRoutine("Courez sur les plateformes suspendues pour les faire balancer !", Color.green);
+
 
         }
     }

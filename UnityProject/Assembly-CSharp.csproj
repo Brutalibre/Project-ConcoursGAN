@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Tags.cs" />
      <Compile Include="Assets\Scripts\Teleport.cs" />
+     <Compile Include="Assets\Scripts\TextScript.cs" />
      <Compile Include="Assets\Scripts\TransformAnimation.cs" />
      <Compile Include="Assets\Scripts\ZPlatform.cs" />
      <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
