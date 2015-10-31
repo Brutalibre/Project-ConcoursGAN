@@ -19,7 +19,6 @@ public class DecorCheck : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag != Tags.Portal)
-            againstDecor = false;
+        againstDecor = false;
     }
 }
