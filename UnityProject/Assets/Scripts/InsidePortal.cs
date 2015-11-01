@@ -33,6 +33,7 @@ public class InsidePortal : MonoBehaviour {
                 Debug.Log("exit");
             }
 
+            gameObject.GetComponentInChildren<AudioSource>().Play();
             insidePortal = true;
         }
     }

@@ -66,6 +66,8 @@
      <Compile Include="Assets\Scripts\InsidePortal.cs" />
      <Compile Include="Assets\Scripts\Menu\CameraCredits.cs" />
      <Compile Include="Assets\Scripts\Menu\CursorScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\IGCursorScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuBox.cs" />
      <Compile Include="Assets\Scripts\Menu\SceneFadeInOut.cs" />
      <Compile Include="Assets\Scripts\MovingPlatform.cs" />

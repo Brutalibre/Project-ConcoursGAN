@@ -49,7 +49,7 @@ public class CameraCredits : MonoBehaviour {
         // pos[i][2] = rot(z)
         if (!fadeIn && !fadeOut)
         {
-            if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
+            if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && etape < 4)
             {
                 Debug.Log(transform.rotation);
                 etape++;

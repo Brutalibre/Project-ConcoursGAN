@@ -41,7 +41,7 @@ public class Bounce : MonoBehaviour
                 playerScript.Bounce();
 
             // Play sound
-           // sound.Play();
+            sound.Play();
         }
     }
 }

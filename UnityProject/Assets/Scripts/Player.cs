@@ -20,10 +20,13 @@ public class Player : MonoBehaviour
     private float bounceDuration = 0f;
     private float minBounceDuration = 0.1f;
     private bool isMinBoucing = false;
-    private bool canMove = true;
+    public bool canMove = true;
     private bool isJumping = false;
     private float minJumpDuration = 0.1f;
     private float jumpDuration = 0f;
+
+    public bool menuOpen = false;
+    public Canvas menu;
 
 
     private bool fadeIn = true;
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        menu.enabled = false;
     }
 
     void Update()
@@ -46,10 +50,45 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!fadeIn && !fadeOut)
+        if (!fadeIn && !fadeOut && !menuOpen)
         { 
             // Move the player according to the user input
             Move();
+        }
+
+        if (menu.enabled)
+        {
+            canMove = false; 
+            canJump = false;
+
+            // appuyer sur Echap lorsque le menu est ouvert le ferme.
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                menuOpen = false;
+
+                Debug.Log("close");
+
+                menu.enabled = false;
+            }
+
+        }
+
+
+        else if (!menu.enabled)
+        {
+            canMove = true;
+            canJump = true;
+
+            // appuyer sur Echap lorsque le menu est fermé l'ouvre.
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                menuOpen = true;
+
+                Debug.Log("open");
+
+                menu.enabled = true;
+            }
+
         }
 
 
@@ -107,7 +146,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    void Die()
+    public void Die()
     {
         // The scene will be reloaded by the game controller
         GameController.instance.PlayerDied();
@@ -214,5 +253,7 @@ public class Player : MonoBehaviour
         rb.AddForce(Vector3.up * jumpForce);
         isJumping = true;
         jumpDuration = 0f;
+
+        gameObject.GetComponentInChildren<AudioSource>().Play();
     }
 }
