@@ -7,6 +7,16 @@ public class CameraCredits : MonoBehaviour {
     private int[][] pos;
     private int etape;
     public float duration = .5f;
+    bool fadeIn = true;
+    bool fadeOut = false;
+    SceneFadeInOut fadeScr;
+
+
+    void Awake()
+    {
+        fadeIn = true;
+        fadeScr = gameObject.GetComponent<SceneFadeInOut>();
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -37,12 +47,33 @@ public class CameraCredits : MonoBehaviour {
         // pos[i][0] = x
         // pos[i][1] = y
         // pos[i][2] = rot(z)
-
-        if (Input.anyKeyDown)
+        if (!fadeIn && !fadeOut)
         {
-            Debug.Log(transform.rotation);
-            etape ++;
-            StartCoroutine(Transition(new Vector3(pos[etape][0], pos[etape][1], transform.position.z), new Vector3(0, 0, pos[etape][2])));
+            if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log(transform.rotation);
+                etape++;
+                StartCoroutine(Transition(new Vector3(pos[etape][0], pos[etape][1], transform.position.z), new Vector3(0, 0, pos[etape][2])));
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                fadeOut = true;
+            }
+        }
+
+        if (fadeIn)
+        {
+            if (fadeScr.FadeToClear())
+                fadeIn = false;
+        }
+
+        if (fadeOut)
+        {
+            if (fadeScr.FadeToBlack())
+            {
+                Application.LoadLevel("Main Menu");
+            }
         }
 
         /*transform.position = Vector3.Lerp(transform.position, new Vector3(pos[etape][0], pos[etape][1], transform.position.z), );

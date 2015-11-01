@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
     public float reloadGameTime = 2f;
-
+    
     private Player player;
     private Vector3 checkPoint;
     private ColorCollector colorCollector;
@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
         // Fetch main camera
         mainCamera = GameObject.FindGameObjectWithTag(Tags.MainCamera);
     }
+    
 
     public void PlayerDied()
     {

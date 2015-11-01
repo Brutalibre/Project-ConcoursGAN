@@ -9,7 +9,8 @@ public class MenuBox : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // mat[0] is indigo
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+        if(script!=null)
+            gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
 	}
 	
 	// Update is called once per frame
@@ -18,6 +19,7 @@ public class MenuBox : MonoBehaviour {
         transform.RotateAround(transform.position, Vector3.forward, spinSpeed);
         transform.RotateAround(transform.position, Vector3.right, spinSpeed);
 
-        gameObject.GetComponent<MeshRenderer>().material.color = script.col;
+        if (script != null)
+            gameObject.GetComponent<MeshRenderer>().material.color = script.col;
     }
 }

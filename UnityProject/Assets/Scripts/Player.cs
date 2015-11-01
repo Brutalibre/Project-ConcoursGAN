@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
     private float minJumpDuration = 0.1f;
     private float jumpDuration = 0f;
 
+
+    private bool fadeIn = true;
+    private bool fadeOut = false;
+    public SceneFadeInOut fadeScr;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,8 +46,27 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Move the player according to the user input
-        Move();
+        if (!fadeIn && !fadeOut)
+        { 
+            // Move the player according to the user input
+            Move();
+        }
+
+
+
+        if (fadeIn)
+        {
+            if (fadeScr.FadeToClear())
+                fadeIn = false;
+        }
+
+        if (fadeOut)
+        {
+            if (fadeScr.FadeToBlack())
+            {
+                Application.LoadLevel("Main Menu");
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)

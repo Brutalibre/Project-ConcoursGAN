@@ -12,77 +12,90 @@ public class CursorScript : MonoBehaviour {
     public AudioSource clicSound;
     public Color col;
 
-    //public Image fadeImg;
-    //public float fadeSpeed;
+    private bool fadeOut = false;
+    private bool fadeIn = true;
+    public SceneFadeInOut fadeScript;
 
     // Use this for initialization
     void Start () {
 
         //Cursor.visible = false;
-
-        //fadeImg.color = new Color(fadeImg.color.r, fadeImg.color.g, fadeImg.color.b, 0);
-
+        
         pos = 0;
-
-        // Le curseur est sur Start Game au début.
-        //transform.position = new Vector3(transform.position.x, values[pos], transform.position.z);
     }
 
     // Update is called once per frame
     void Update () {
+
         // Give a rotation effect to this object for better visual
         transform.RotateAround(transform.position, Vector3.up, spinSpeed);
         transform.RotateAround(transform.position, Vector3.forward, spinSpeed);
         transform.RotateAround(transform.position, Vector3.right, spinSpeed);
 
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (pos < 2)
-                pos++;
-
-            else
-                pos = 0;
-
-            TextColor();
-            transform.position = new Vector3(transform.position.x, values[pos], transform.position.z);
-            clicSound.Play();
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (pos > 0)
-                pos--;
-
-            else
-                pos = 2;
-
-            TextColor();
-            transform.position =  new Vector3(transform.position.x, values[pos], transform.position.z);
-            clicSound.Play();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
-        {
-            switch (pos)
+        if (!fadeOut && !fadeIn) { 
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                // Start Game
-                case 0:
-                    loadSound.Play();
-                    //FadeToBlack("First_Level");
-                    Application.LoadLevel("First_Level");
-                    break;
+                if (pos < 2)
+                    pos++;
 
-                // Credits
-                case 1:
-                    //Application.LoadLevel("Credits");
-                    break;
-                
-                // Exit
-                case 2:
-                    Application.Quit();
-                    break;
+                else
+                    pos = 0;
+
+                TextColor();
+                transform.position = new Vector3(transform.position.x, values[pos], transform.position.z);
+                clicSound.Play();
             }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (pos > 0)
+                    pos--;
+
+                else
+                    pos = 2;
+
+                TextColor();
+                transform.position =  new Vector3(transform.position.x, values[pos], transform.position.z);
+                clicSound.Play();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+            {
+                loadSound.Play();
+                fadeOut = true;
+            }
+        }
+
+        else if(fadeOut == true)
+        {
+            if (fadeScript.FadeToBlack())
+            {
+                switch (pos)
+                {
+                    // Start Game
+                    case 0:
+                        Application.LoadLevel("First_Level");
+                        break;
+
+                    // Credits
+                    case 1:
+                        Application.LoadLevel("Credits");
+                        break;
+
+                    // Exit
+                    case 2:
+                        Application.Quit();
+                        break;
+                }
+            }
+            
+        }
+
+        else
+        {
+            if (fadeScript.FadeToClear())
+                fadeIn = false;
         }
     }
 
@@ -144,27 +157,5 @@ public class CursorScript : MonoBehaviour {
         /*Vector3 vec = Random.insideUnitSphere/2;
         return new Color(vec.x + .5f, vec.y + .5f, vec.z + .5f);*/
     }
-
-    /*void FadeToBlack(string level)
-    {
-        Debug.Log("fade1");
-
-        // Start fading towards black.
-        // Lerp the colour of the image between itself and black
-        fadeImg.color = Color.Lerp(fadeImg.color, Color.black, fadeSpeed * Time.deltaTime);
-
-        // But HOW to make it fade continuously ? If i put a "while" there it doesn't update the screen... 
-
-        Debug.Log(fadeImg.color.a);
-
-        // If the screen is almost black...
-        if (fadeImg.color.a >= 0.95f)
-            // ... load the level
-            Application.LoadLevel(level);
-
-        Debug.Log("fade3");
-
-    }*/
-
-
+    
 }
