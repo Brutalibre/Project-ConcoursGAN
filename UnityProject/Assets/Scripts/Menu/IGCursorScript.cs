@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class IGCursorScript : MonoBehaviour {
 
-    private int pos;
+    /*private int pos;
     public Text[] menuText = new Text[3];
     public AudioSource loadSound;
     public AudioSource clicSound;
@@ -152,7 +152,7 @@ public class IGCursorScript : MonoBehaviour {
         return col;
 
         /*Vector3 vec = Random.insideUnitSphere/2;
-        return new Color(vec.x + .5f, vec.y + .5f, vec.z + .5f);*/
-    }
+        return new Color(vec.x + .5f, vec.y + .5f, vec.z + .5f);
+    }*/
     
 }

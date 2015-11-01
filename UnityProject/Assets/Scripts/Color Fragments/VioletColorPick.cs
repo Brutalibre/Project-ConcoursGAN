@@ -16,7 +16,7 @@ public class VioletColorPick : ColorPick {
 
         // Activate help text
         txt.GetComponent<TextScript>().enabled = true;
-        txt.GetComponent<TextScript>().launchRoutine("Entrez dans les portails violets pour être téléporté de l'autre côté !", new Color(0.545f,0.294f,0.698f));
+        txt.GetComponent<TextScript>().launchRoutine("Entrez dans un portail violet pour être téléporté de l'autre côté!", new Color(0.545f,0.294f,0.698f));
 
     }
 }

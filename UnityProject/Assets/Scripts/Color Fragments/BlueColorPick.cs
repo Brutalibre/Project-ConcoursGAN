@@ -15,7 +15,7 @@ public class BlueColorPick : ColorPick {
 
         // Activate help text
         txt.GetComponent<TextScript>().enabled = true;
-        txt.GetComponent<TextScript>().launchRoutine("Marchez sur les blocs bleus pour prendre des tunnels !", Color.blue);
+        txt.GetComponent<TextScript>().launchRoutine("Marchez sur les blocs bleus pour prendre des tunnels!", Color.blue);
 
     }
 }

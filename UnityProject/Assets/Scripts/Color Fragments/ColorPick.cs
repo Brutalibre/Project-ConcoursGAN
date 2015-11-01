@@ -5,13 +5,17 @@ public abstract class ColorPick : MonoBehaviour
 {
     public float spinSpeed = 3f;
     public ColorCollector colorCollector;
+    public AudioSource sound;
 
     protected void OnTriggerEnter(Collider other)
     {
         if (other.tag == Tags.Player)
         {
             OnColorPick();
-            
+
+            // Play sound
+            sound.Play();
+
             // Add color to the collection
             colorCollector.Collect(ColorCollector.Color.Red);
             

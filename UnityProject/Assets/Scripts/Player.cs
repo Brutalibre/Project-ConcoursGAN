@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public bool menuOpen = false;
     public Canvas menu;
 
+    public AudioSource deathSound;
 
     private bool fadeIn = true;
     private bool fadeOut = false;
@@ -56,10 +57,11 @@ public class Player : MonoBehaviour
             Move();
         }
 
-        if (menu.enabled)
+        /*if (menu.enabled)
         {
             canMove = false; 
             canJump = false;
+            menuOpen = true;
 
             // appuyer sur Echap lorsque le menu est ouvert le ferme.
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -78,18 +80,17 @@ public class Player : MonoBehaviour
         {
             canMove = true;
             canJump = true;
+            menuOpen = false;
 
             // appuyer sur Echap lorsque le menu est fermé l'ouvre.
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 menuOpen = true;
-
                 Debug.Log("open");
-
                 menu.enabled = true;
             }
 
-        }
+        }*/
 
 
 
@@ -146,7 +147,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void Die()
+    void Die()
     {
         // The scene will be reloaded by the game controller
         GameController.instance.PlayerDied();
@@ -154,6 +155,7 @@ public class Player : MonoBehaviour
         // Death animation
         colorCollector.BurstColors(transform.position);
 
+        deathSound.Play();
 
         rb.velocity = Vector3.zero;
 

@@ -22,7 +22,7 @@ public class YellowColorPick : ColorPick
 
             // Activate help text
             txt.GetComponent<TextScript>().enabled = true;
-            txt.GetComponent<TextScript>().launchRoutine("Touchez les plateformes jaunes pour les activer !", Color.yellow);
+            txt.GetComponent<TextScript>().launchRoutine("Touchez les plateformes jaunes pour les activer!", Color.yellow);
 
         }
     }

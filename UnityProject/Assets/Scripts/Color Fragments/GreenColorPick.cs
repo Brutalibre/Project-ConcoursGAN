@@ -33,7 +33,7 @@ public class GreenColorPick : ColorPick {
 
             // Activate help text
             txt.GetComponent<TextScript>().enabled = true;
-            txt.GetComponent<TextScript>().launchRoutine("Courez sur les plateformes suspendues pour les faire balancer !", Color.green);
+            txt.GetComponent<TextScript>().launchRoutine("Courez sur les plateformes suspendues pour les faire balancer!", Color.green);
 
 
         }

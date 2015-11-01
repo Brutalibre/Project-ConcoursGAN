@@ -20,6 +20,6 @@ public class OrangeColorPick : ColorPick
 
         // Activate help text
         orangeText.GetComponent<TextScript>().enabled = true;
-        orangeText.GetComponent<TextScript>().launchRoutine("Appuyez sur ESPACE pour sauter !", new Color(1, 0.474f, 0));
+        orangeText.GetComponent<TextScript>().launchRoutine("Appuyez sur ESPACE pour sauter!", new Color(1, 0.474f, 0));
     }
 }
