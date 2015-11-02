@@ -31,4 +31,8 @@ public abstract class ColorPick : MonoBehaviour
     }
 
     protected abstract void OnColorPick();
+
+    public virtual void Reset()
+    {
+    }
 }
