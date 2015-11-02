@@ -10,6 +10,7 @@ public class BluePath : MonoBehaviour
     [HideInInspector]
     public bool waitForExit = false;
 
+
     private Player playerScript = null;
     private Transform player = null;
     private bool isMovingPlayer = false;
@@ -43,6 +44,7 @@ public class BluePath : MonoBehaviour
         if(other.tag == Tags.Player)
         {
             player = other.transform;
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
             playerScript = other.gameObject.GetComponent<Player>();
             rb = other.gameObject.GetComponent<Rigidbody>();
             rb.isKinematic = true;
@@ -68,7 +70,7 @@ public class BluePath : MonoBehaviour
             return;
 
         // Go towards the next point of the blue path
-        Vector3 target = bluePath[bluePathIndex].position;
+        Vector3 target = bluePath[bluePathIndex].position;Debug.Log(target);
         Vector3 direction = target - player.position;
         Vector3 move = direction.normalized * speed;
         Vector3 newPlayerPosition = player.position + move;
@@ -89,7 +91,7 @@ public class BluePath : MonoBehaviour
         player.position = newPlayerPosition;
 
         // If the target point was reached, move on to the next one
-        if (player.position == target)
+        if (player.position.x == target.x && player.position.y == target.y)
         {
             player.position = target;
             bluePathIndex++;
@@ -101,6 +103,7 @@ public class BluePath : MonoBehaviour
                 bluePathIndex = 0;
                 playerScript.enabled = true;
                 rb.isKinematic = false;
+                player.gameObject.GetComponent<BoxCollider>().enabled = true;
                 playerScript.ResetDecorCheck();
             }
         }

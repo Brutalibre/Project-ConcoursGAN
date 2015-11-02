@@ -7,11 +7,6 @@ public class InsidePortal : MonoBehaviour {
     public Player player;
     public GameObject entrance;
     public GameObject exit;
-
-	// Use this for initialization
-	void Start () {
-	    
-	}
 	
 	// Update is called once per frame
 	void Update () {
