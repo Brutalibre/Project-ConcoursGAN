@@ -192,7 +192,10 @@ public class Player : MonoBehaviour
 
     bool IsDoneBouncing()
     {
-        return rb.velocity == Vector3.zero && !isMinBoucing;
+        if (isMinBoucing)
+            return false;
+
+        return rb.velocity.y == 0 || groundCheck.againstDecor;
     }
 
     void CheckBounce()
