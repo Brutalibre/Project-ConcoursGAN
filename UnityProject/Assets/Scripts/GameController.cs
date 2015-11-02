@@ -65,4 +65,16 @@ public class GameController : MonoBehaviour
             fragments[i].Reset();
         }
     }
+
+    public void FreezePlayer(float time)
+    {
+        player.enabled = false;
+        StartCoroutine(ReleasePlayer(time));
+    }
+
+    public IEnumerator ReleasePlayer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        player.enabled = true;
+    }
 }

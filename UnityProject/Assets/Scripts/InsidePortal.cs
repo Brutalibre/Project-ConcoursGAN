@@ -28,6 +28,9 @@ public class InsidePortal : MonoBehaviour {
                 Debug.Log("exit");
             }
 
+            player.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GameController.instance.FreezePlayer(.3f);
+
             gameObject.GetComponentInChildren<AudioSource>().Play();
             insidePortal = true;
         }
