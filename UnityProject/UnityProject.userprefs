@@ -1,24 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BluePath.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Menu/CursorScript.cs">
     <Files>
-      <File FileName="../../PCG-AngryBirds/Assets/Scripts/PythagorasParser.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BluePath.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Color Fragments/BlueColorPick.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Menu/CursorScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/DecorCheck.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Teleport.cs" Line="11" Column="6" />
-      <File FileName="Assets/Scripts/InsidePortal.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Menu/StartGameAnimation.cs" Line="37" Column="54" />
+      <File FileName="Assets/Scripts/Menu/CursorScript.cs" Line="66" Column="80" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Color Fragments" expanded="True" />
-              <Node name="Menu" expanded="True" />
-              <Node name="BluePath.cs" selected="True" />
+              <Node name="Menu" expanded="True">
+                <Node name="CursorScript.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>

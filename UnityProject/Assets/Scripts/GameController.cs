@@ -31,7 +31,6 @@ public class GameController : MonoBehaviour
         // Fetch main camera
         mainCamera = GameObject.FindGameObjectWithTag(Tags.MainCamera);
     }
-    
 
     public void PlayerDied()
     {
