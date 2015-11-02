@@ -252,6 +252,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
+        rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * jumpForce);
         isJumping = true;
         jumpDuration = 0f;
