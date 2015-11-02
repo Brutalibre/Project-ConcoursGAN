@@ -10,14 +10,16 @@ public class YellowColorPick : ColorPick
     public Text txt;
 
     private List<Vector3> originalPositions = new List<Vector3>();
+    private List<bool> waitForPlayer = new List<bool>();
 
     void Start()
     {
         // Save the original position of all platforms 
-        // Used to reset level upon player's death
+        // Used to reset platforms upon player's death
         for(int i = 0; i < platforms.Count; i++)
         {
             originalPositions.Add(platforms[i].transform.position);
+            waitForPlayer.Add(platforms[i].waitForPlayer);
         }
     }
 
@@ -44,6 +46,7 @@ public class YellowColorPick : ColorPick
         {
             platforms[i].Stop();
             platforms[i].transform.position = originalPositions[i];
+            platforms[i].waitForPlayer = waitForPlayer[i];
         }
     }
 }

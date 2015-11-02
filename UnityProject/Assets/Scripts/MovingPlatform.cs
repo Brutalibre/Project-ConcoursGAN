@@ -100,5 +100,6 @@ public class MovingPlatform : MonoBehaviour
     {
         isStarted = false;
         waitTime = 0f;
+        rb.velocity = Vector3.zero;
     }
 }
