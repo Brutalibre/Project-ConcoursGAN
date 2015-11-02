@@ -9,6 +9,19 @@ public class YellowColorPick : ColorPick
     public Material color;
     public Text txt;
 
+    private List<Vector3> originalPositions = new List<Vector3>();
+    private List<bool> waitForPlayer = new List<bool>();
+
+    void Start()
+    {
+        // Save the original position of all platforms 
+        // Used to reset platforms upon player's death
+        for(int i = 0; i < platforms.Count; i++)
+        {
+            originalPositions.Add(platforms[i].transform.position);
+            waitForPlayer.Add(platforms[i].waitForPlayer);
+        }
+    }
 
     protected override void OnColorPick()
     {
@@ -24,6 +37,16 @@ public class YellowColorPick : ColorPick
             txt.GetComponent<TextScript>().enabled = true;
             txt.GetComponent<TextScript>().launchRoutine("Touchez les plateformes jaunes pour les activer!", Color.yellow);
 
+        }
+    }
+
+    public override void Reset()
+    {
+        for(int i = 0; i < platforms.Count; i++)
+        {
+            platforms[i].Stop();
+            platforms[i].transform.position = originalPositions[i];
+            platforms[i].waitForPlayer = waitForPlayer[i];
         }
     }
 }

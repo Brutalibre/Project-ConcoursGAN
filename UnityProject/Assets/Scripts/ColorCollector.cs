@@ -70,15 +70,16 @@ public class ColorCollector : MonoBehaviour
         // This animation is triggered when the player dies
 
         List<ColorCollector.Color> colors = new List<ColorCollector.Color>(collectedColors);
+        List<Vector3> positions = new List<Vector3>(burstPositions);
         int collectedColorsCount = colors.Count;
         for (int i = 0; i < collectedColorsCount; i++)
         {
             // Get random position for the current color
             int randomIndex = Random.Range(0,colors.Count);
-            Vector3 position = burstPositions[randomIndex];
+            Vector3 position = positions[randomIndex];
             position += targetPosition;
             burstPosition = targetPosition;
-            burstPositions.RemoveAt(randomIndex);
+            positions.RemoveAt(randomIndex);
             
             // Instantiate cube and give it the current color
             GameObject instance = Instantiate(colorCube,position,Quaternion.identity) as GameObject;

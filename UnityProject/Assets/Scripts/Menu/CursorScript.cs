@@ -11,6 +11,8 @@ public class CursorScript : MonoBehaviour {
     public AudioSource loadSound;
     public AudioSource clicSound;
     public Color col;
+    public StartGameAnimation animationScript;
+    public float fadeDelay = 1f;
 
     private bool fadeOut = false;
     private bool fadeIn = true;
@@ -64,11 +66,21 @@ public class CursorScript : MonoBehaviour {
             {
                 loadSound.Play();
                 fadeOut = true;
+
+                if(pos == 0)
+                    animationScript.StartAnimation();
+                else 
+                    fadeDelay = 0f;
+
             }
         }
 
         else if(fadeOut == true)
         {
+            fadeDelay -= Time.deltaTime;
+            if(fadeDelay > 0)
+                return;
+
             if (fadeScript.FadeToBlack())
             {
                 switch (pos)

@@ -14,10 +14,8 @@ public class TransformAnimation : MonoBehaviour
     private float margin = .1f;
     private Rigidbody rb;
     private float waitTime = 0f;
-    private bool isStarted = false;
     private int currentIndex = 0;
     private Transform player;
-    bool playerOn = false;
 
     void Awake()
     {
@@ -30,7 +28,6 @@ public class TransformAnimation : MonoBehaviour
         if (other.gameObject.tag == Tags.Player)
         {
             waitForPlayer = false;
-            player = other.transform;
         }
     }
     

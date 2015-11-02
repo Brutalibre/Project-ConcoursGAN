@@ -7,11 +7,6 @@ public class InsidePortal : MonoBehaviour {
     public Player player;
     public GameObject entrance;
     public GameObject exit;
-
-	// Use this for initialization
-	void Start () {
-	    
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -32,6 +27,9 @@ public class InsidePortal : MonoBehaviour {
                 player.transform.position = entrance.transform.position;
                 Debug.Log("exit");
             }
+
+            player.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GameController.instance.FreezePlayer(.3f);
 
             gameObject.GetComponentInChildren<AudioSource>().Play();
             insidePortal = true;

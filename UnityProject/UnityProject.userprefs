@@ -1,12 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../PCG-AngryBirds/Assets/Scripts/PythagorasParser.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
     <Files>
-      <File FileName="../../PCG-AngryBirds/Assets/Scripts/PythagorasParser.cs" Line="77" Column="9" />
+      <File FileName="Assets/Scripts/Menu/StartGameAnimation.cs" Line="37" Column="54" />
+      <File FileName="Assets/Scripts/Player.cs" Line="195" Column="13" />
+      <File FileName="Assets/Scripts/BluePath.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Teleport.cs" Line="5" Column="2" />
+      <File FileName="Assets/Scripts/InsidePortal.cs" Line="9" Column="28" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="GameController.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

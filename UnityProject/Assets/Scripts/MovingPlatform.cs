@@ -95,4 +95,11 @@ public class MovingPlatform : MonoBehaviour
             
         return false;
     }
+
+    public void Stop()
+    {
+        isStarted = false;
+        waitTime = 0f;
+        rb.velocity = Vector3.zero;
+    }
 }

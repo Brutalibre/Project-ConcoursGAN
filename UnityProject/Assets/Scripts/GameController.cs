@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
     public float reloadGameTime = 2f;
+    public List<ColorPick> fragments = new List<ColorPick>();
     
     private Player player;
     private Vector3 checkPoint;
@@ -30,7 +31,6 @@ public class GameController : MonoBehaviour
         // Fetch main camera
         mainCamera = GameObject.FindGameObjectWithTag(Tags.MainCamera);
     }
-    
 
     public void PlayerDied()
     {
@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(reloadGameTime);
 
         colorCollector.CleanUp();
+        ResetFragments();
 
         // Set camera to player's position
         Vector3 position = mainCamera.transform.position;
@@ -55,5 +56,25 @@ public class GameController : MonoBehaviour
     public void SetCheckPoint(Vector3 position)
     {
         checkPoint = position;
+    }
+
+    void ResetFragments()
+    {
+        for (int i = 0; i < fragments.Count; i++)
+        {
+            fragments[i].Reset();
+        }
+    }
+
+    public void FreezePlayer(float time)
+    {
+        player.enabled = false;
+        StartCoroutine(ReleasePlayer(time));
+    }
+
+    public IEnumerator ReleasePlayer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        player.enabled = true;
     }
 }
