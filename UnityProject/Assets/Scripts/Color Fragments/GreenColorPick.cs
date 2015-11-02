@@ -18,6 +18,8 @@ public class GreenColorPick : ColorPick {
             GameObject sup = greenPlatforms[i].transform.Find("Support").gameObject;
             GameObject rope = greenPlatforms[i].transform.Find("Rope").gameObject;
 
+            colorCollector.Collect(ColorCollector.Color.Green);
+
             // Activate support + rope
 
             sup.SetActive(true);

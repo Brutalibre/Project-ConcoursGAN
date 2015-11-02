@@ -16,8 +16,7 @@ public abstract class ColorPick : MonoBehaviour
             // Play sound
             sound.Play();
 
-            // Add color to the collection
-            colorCollector.Collect(ColorCollector.Color.Red);
+
             
             // Hide this object
             gameObject.SetActive(false);

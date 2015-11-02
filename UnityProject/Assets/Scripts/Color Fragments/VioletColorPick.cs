@@ -14,6 +14,9 @@ public class VioletColorPick : ColorPick {
         boulders.SetActive(true);
         platforms.SetActive(true);
 
+
+        colorCollector.Collect(ColorCollector.Color.Violet);
+
         // Activate help text
         txt.GetComponent<TextScript>().enabled = true;
         txt.GetComponent<TextScript>().launchRoutine("Entrez dans un portail violet pour être téléporté de l'autre côté!", new Color(0.545f,0.294f,0.698f));

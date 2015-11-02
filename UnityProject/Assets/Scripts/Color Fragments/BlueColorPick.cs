@@ -13,6 +13,9 @@ public class BlueColorPick : ColorPick {
         // Activate the bouncing boxes
         SecretPaths.SetActive(true);
 
+
+        colorCollector.Collect(ColorCollector.Color.Blue);
+
         // Activate help text
         txt.GetComponent<TextScript>().enabled = true;
         txt.GetComponent<TextScript>().launchRoutine("Marchez sur les blocs bleus pour prendre des tunnels!", Color.blue);

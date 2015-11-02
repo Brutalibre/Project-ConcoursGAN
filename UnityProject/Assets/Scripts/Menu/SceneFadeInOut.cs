@@ -16,7 +16,7 @@ public class SceneFadeInOut : MonoBehaviour
         Debug.Log("fadeClear");
 
         // when the color is almost clear, return true
-        if (FadeImg.color.a <= 0.01f)
+        if (FadeImg.color.a <= 0.05f)
             return true;
 
         else return false;

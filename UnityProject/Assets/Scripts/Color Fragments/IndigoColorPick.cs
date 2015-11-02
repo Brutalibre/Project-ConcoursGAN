@@ -6,6 +6,8 @@ public class IndigoColorPick : ColorPick {
     
     protected override void OnColorPick()
     {
+
+        colorCollector.Collect(ColorCollector.Color.Indigo);
         Application.LoadLevel("Credits");
     }
 
