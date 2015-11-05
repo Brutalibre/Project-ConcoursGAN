@@ -69,6 +69,25 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    public bool MoveTowardsTarget(Vector3 targetPosition, float speed)
+    {
+        Vector3 direction = targetPosition - transform.position;
+
+        float margin = speed < 6 ? .05f : .25f;
+
+        // If this is close enough to the target, set position to that of the target
+        if (direction.magnitude < margin)
+        {
+            transform.position = targetPosition;
+            return true;
+        }
+
+        rb.velocity = direction.normalized * speed;
+
+        // The target has not been reached yet
+        return false;
+    }
+
     public void Jump()
     {
         if (IsGrounded())

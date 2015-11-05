@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\DecorCheck.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\InsidePortal.cs" />
+     <Compile Include="Assets\Scripts\Layers.cs" />
      <Compile Include="Assets\Scripts\Menu\CameraCredits.cs" />
      <Compile Include="Assets\Scripts\Menu\CursorScript.cs" />
      <Compile Include="Assets\Scripts\Menu\IGCursorScript.cs" />
@@ -81,6 +82,7 @@
      <Compile Include="Assets\Scripts\TransformAnimation.cs" />
      <Compile Include="Assets\Scripts\ZPlatform.cs" />
      <None Include="Assets\PrimitivePlus\Documentation\ReadMe.txt" />
+     <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
      <None Include="Assets\TSF\Shaders\TSFOutline.shader" />
      <None Include="Assets\TSF\Shaders\TSF.shader" />
  <Reference Include="UnityEngine.UI">

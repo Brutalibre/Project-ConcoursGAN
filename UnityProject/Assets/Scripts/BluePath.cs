@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,17 +6,20 @@ public class BluePath : MonoBehaviour
 {
     public float speed = 1f;
     public bool goingForward = true;
+    public bool keepMomemtumAtEnd = false;
     public BluePath otherEnd;
+    public GameObject blueTrail;
+
     [HideInInspector]
     public bool waitForExit = false;
 
-
-    private Player playerScript = null;
-    private Transform player = null;
+    private PlayerControl playerControl = null;
+    private CharacterMovement playerMovement = null;
     private bool isMovingPlayer = false;
     private Rigidbody rb;
     private int bluePathIndex = 0;
     private List<Transform> bluePath = new List<Transform>();
+    private GameObject blueTrailInstance;
 
     void Start()
     {
@@ -25,7 +28,6 @@ public class BluePath : MonoBehaviour
 
         // Add all other points
         Transform keyFrames = transform.parent.FindChild("KeyFrames");
-
         for (int i = 0; i < keyFrames.childCount; i++)
         {
             int index = goingForward ? i : keyFrames.childCount - 1 - i;
@@ -43,14 +45,25 @@ public class BluePath : MonoBehaviour
 
         if(other.tag == Tags.Player)
         {
-            player = other.transform;
-            other.gameObject.GetComponent<BoxCollider>().enabled = false;
-            playerScript = other.gameObject.GetComponent<Player>();
-            rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            playerScript.enabled = false;
-            isMovingPlayer = true;
+            // Script used to move the player
+            playerMovement = other.gameObject.GetComponent<CharacterMovement>();
 
+            // Disable user control during while blue path is moving the player
+            playerControl = other.gameObject.GetComponent<PlayerControl>();
+            playerControl.enabled = false;
+
+            // Put player in the transportation layer
+            other.gameObject.layer = LayerMask.NameToLayer(Layers.Ghost);
+
+            // Ignore gravity
+            other.gameObject.GetComponent<Rigidbody>().useGravity = false;
+
+            // Hide player in blue path
+            //other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            CreateBlueTrail();
+
+            isMovingPlayer = true;
             otherEnd.waitForExit = true;
         }
     }
@@ -64,48 +77,78 @@ public class BluePath : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(!isMovingPlayer)
+            return;
+
+        UpdateBlueTrail();
+    }
+
     void FixedUpdate()
     {
         if(!isMovingPlayer)
             return;
 
         // Go towards the next point of the blue path
-        Vector3 target = bluePath[bluePathIndex].position;Debug.Log(target);
-        Vector3 direction = target - player.position;
-        Vector3 move = direction.normalized * speed;
-        Vector3 newPlayerPosition = player.position + move;
-
-        // Make sure player doesn't go beyond the blue path points
-
-        // If the player is going to the right or left, make sure they don't go beyond the current point
-        int horizontalDirection = direction.x >= 0 ? 1 : -1;
-        if(newPlayerPosition.x * horizontalDirection > bluePath[bluePathIndex].position.x * horizontalDirection)
-            newPlayerPosition.x = bluePath[bluePathIndex].position.x;
-
-        // If the player is going up or down, make sure they don't go beyond the current point
-        int verticalDirection = direction.y >= 0 ? 1 : -1;
-        if (newPlayerPosition.y * verticalDirection > bluePath[bluePathIndex].position.y * verticalDirection)
-            newPlayerPosition.y = bluePath[bluePathIndex].position.y;
-
-        // Update player position
-        player.position = newPlayerPosition;
+        Vector3 targetPosition = bluePath[bluePathIndex].position;
+        bool targetReached = playerMovement.MoveTowardsTarget(targetPosition, speed);
 
         // If the target point was reached, move on to the next one
-        if (player.position.x == target.x && player.position.y == target.y)
+        if (targetReached)
         {
-            player.position = target;
             bluePathIndex++;
+
+            Rigidbody rb = playerControl.gameObject.GetComponent<Rigidbody>();
 
             // If the last point of the blue path was reached, finish animation
             if(bluePathIndex >= bluePath.Count)
             {
                 isMovingPlayer = false;
                 bluePathIndex = 0;
-                playerScript.enabled = true;
-                rb.isKinematic = false;
-                player.gameObject.GetComponent<BoxCollider>().enabled = true;
-                playerScript.ResetDecorCheck();
+
+                // Put player in their original layer
+                playerMovement.gameObject.layer = LayerMask.NameToLayer(Layers.Default);
+
+                // Enable user controls again
+                playerControl.enabled = true;
+
+                // Use gravity again
+                rb.useGravity = true;
+
+                // Show player again
+                Destroy(blueTrailInstance);
+                playerMovement.gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+                // Cancel velocity to remove momemtum gathered in the blue path
+                if(!keepMomemtumAtEnd)
+                    rb.velocity = Vector3.zero;
             }
+            // Remove momemtun of blue path object when changing direction
+            else
+                rb.velocity = Vector3.zero;
         }
+    }
+
+    void CreateBlueTrail()
+    {
+        blueTrailInstance = GameObject.Instantiate(blueTrail) as GameObject;
+        blueTrailInstance.transform.SetParent(playerMovement.transform);
+        blueTrailInstance.transform.localPosition = Vector3.back;
+        blueTrailInstance.transform.localRotation = Quaternion.identity;
+    }
+
+    void UpdateBlueTrail()
+    {
+        Rigidbody rb = playerControl.gameObject.GetComponent<Rigidbody>();
+        
+        if (rb.velocity.x > 0)
+            blueTrailInstance.transform.rotation = Quaternion.LookRotation(Vector3.left);
+        else if (rb.velocity.x < 0)
+            blueTrailInstance.transform.rotation = Quaternion.LookRotation(Vector3.right);
+        else if (rb.velocity.y >= 0)
+            blueTrailInstance.transform.rotation = Quaternion.LookRotation(Vector3.down);
+        else
+            blueTrailInstance.transform.rotation = Quaternion.LookRotation(Vector3.up); 
     }
 }
